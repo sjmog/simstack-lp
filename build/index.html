@@ -70,11 +70,187 @@
     input, select { vertical-align:middle; }
 
     /* END reset */
+
+    /* BEGIN typography */
+
+    @font-face {
+      src: url(https://api-8kxgumx3p-monolisa.vercel.app/api/woff?eyJpbmNsdWRlIjpbXSwiZXhjbHVkZSI6W10sInN0eWxlIjoibm9ybWFsIiwidW5pY29kZVJhbmdlIjoiVSswMDIwLTAwN0YsIFUrMDMwMC0wMzZGLCBVKzIwQTAtMjBDRiwgVSswMERGLCBVKzAwRDgiLCJ2ZXJzaW9uIjoiMi4wMTIiLCJmb3JtYXQiOiJ3b2ZmMiJ9) format("woff2");
+      font-family: ml;
+      font-weight: 100 900;
+      font-style: normal;
+      unicode-range: U+0020-007F, U+0300-036F, U+20A0-20CF, U+00DF, U+00D8;
+    }
+
+    html {
+      font: 100%/1.5em "ml", Helvetica, Arial, sans-serif;
+      font-weight: 400;
+    }
+
+    h1, .h1 {
+      font-size: 3em;
+      line-height: 1.333em;
+      margin: 0.667em 0; }
+
+    h2, .h2 {
+      font-size: 2em;
+      line-height: 2em;
+      margin: 1em 0; }
+
+    h3, .h3 {
+      font-size: 1.75em;
+      line-height: 2.286em;
+      margin: 1.143em 0; }
+
+    h4, .h4 {
+      font-size: 1.5em;
+      line-height: 1.333em;
+      margin: 1.333em 0; }
+
+    h5, .h5 {
+      font-size: 1.333em;
+      line-height: 1.5em;
+      margin: 1.5em 0; }
+
+    .smaller {
+      font-size: 1em;
+      line-height: 1.714em; }
+
+    .small {
+      font-size: 1.167em;
+      line-height: 1.714em; }
+
+    .normal {
+      font-size: 1.333em;
+      line-height: 1.5em; }
+
+    .big {
+      font-size: 1.5em;
+      line-height: 1.333em;
+    }
+
+    .bigger {
+      font-size: 1.75em;
+      line-height: 2.286em;
+    }
+
+    a {
+      color: rgb(229, 206, 92);
+      border-bottom: 2px solid rgb(229, 206, 92);
+    }
+
+    a:hover {
+      cursor: pointer;
+      filter: brightness(115%);
+    }
+
+    /* END typography */
+
+    /* BEGIN layout */
+
+    .mb-2 {
+      margin-bottom: 2rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 4rem;
+    }
+
+    .w-1\/2 {
+      width: 50%;
+    }
+
+    /* END layout */
+
+    :root {
+      overscroll-behavior: none;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background-image: linear-gradient(0deg, rgb(0 0 0 / 100%), rgb(15 10 23 / 100%));
+      color: rgb(187, 213, 237);
+    }
+
+    .container {
+      position: relative;
+      height: 100%;
+      padding: 2rem;
+      box-sizing: border-box;
+      max-width: 1260px;
+      margin: 0 auto;
+      display: flex;
+    }
+
+    .h-full {
+      height: 100%;
+    }
+
+    .flex-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .justify-center {
+      justify-content: center;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .brand {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+    }
+
+    .hero {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .stronger {
+      color: rgb(134, 183, 252);
+    }
+
+    .muted {
+      color: rgb(134, 183, 252);
+      opacity: 0.25;
+    }
+
+    .less-muted {
+      color: rgb(134, 183, 252);
+      opacity: 0.35;
+    }
   </style>
 </head>
 
 <body>
-  <p>Hello world! This is simstack.</p>
+
+  <div class='container'>
+    <div class='h-full w-1/2 flex flex-col'>
+      <div class='brand muted'>
+        > simstack
+      </div>
+      <div class='hero'>
+        <h1 class='h3' style="color: rgb(134, 183, 252);">get good @ data engineering</h1>
+        <p class="normal mb-2">level up by <span>training</span> in a simulated large-scale system.</p>
+        <p class="smaller mb-4 less-muted">simstack is a flight simulator for engineers. complete challenges, win prizes, and test yourself against big system problems.</p>
+        <a class="big">> join the waitlist</a>
+      </div>
+    </div>
+    <div class='h-full w-1/2 flex flex-col justify-center items-center'>
+      <span class='muted'>
+        image here
+      </span>
+    </div>
+  </div>
+
   <script type="text/javascript">
     
   </script>
