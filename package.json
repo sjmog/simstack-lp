@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "wrangler": "^3.28.3"
+  },
+  "scripts": {
+    "dev": "npx wrangler pages dev ./build"
+  }
+}

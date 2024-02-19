@@ -4,7 +4,7 @@ The landing page for simstack.
 
 ## Getting started
 
-Go to /build and open index.html.
+`yarn install` and `yarn dev` to start the development server. Then `b` to open the browser.
 
 ## Deploying
 
