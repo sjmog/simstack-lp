@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title></title>
-  <link rel="stylesheet" href="css/style.css">
   <meta name="description" content="">
 
   <meta property="og:title" content="simstack">
@@ -227,6 +226,62 @@
       color: rgb(134, 183, 252);
       opacity: 0.35;
     }
+
+    .blinking-cursor {
+      font-weight: 100;
+      font-size: 30px;
+      color: #2E3D48;
+      -webkit-animation: 1s blink step-end infinite;
+      -moz-animation: 1s blink step-end infinite;
+      -ms-animation: 1s blink step-end infinite;
+      -o-animation: 1s blink step-end infinite;
+      animation: 1s blink step-end infinite;
+    }
+
+    @keyframes "blink" {
+      from, to {
+        color: transparent;
+      }
+      50% {
+        color: rgb(134, 183, 252);
+      }
+    }
+
+    @-moz-keyframes blink {
+      from, to {
+        color: transparent;
+      }
+      50% {
+        color: rgb(134, 183, 252);
+      }
+    }
+
+    @-webkit-keyframes "blink" {
+      from, to {
+        color: transparent;
+      }
+      50% {
+        color: rgb(134, 183, 252);
+      }
+    }
+
+    @-ms-keyframes "blink" {
+      from, to {
+        color: transparent;
+      }
+      50% {
+        color: rgb(134, 183, 252);
+      }
+    }
+
+    @-o-keyframes "blink" {
+      from, to {
+        color: transparent;
+      }
+      50% {
+        color: rgb(134, 183, 252);
+      }
+    }
   </style>
 </head>
 
@@ -238,21 +293,53 @@
         > simstack
       </div>
       <div class='hero'>
-        <h1 class='h3' style="color: rgb(134, 183, 252);">get good @ data engineering</h1>
-        <p class="normal mb-2">level up by <span>training</span> in a simulated large-scale system.</p>
-        <p class="smaller mb-4 less-muted">simstack is a flight simulator for engineers. complete challenges, win prizes, and test yourself against big system problems.</p>
+        <h1 class='h2' style="color: rgb(134, 183, 252);">get good @ data engineering</h1>
+        <p class="normal mb-2">level up by <span style="display: inline-block; width: 135px; color: rgb(134, 183, 252);"><span id='verb'>training</span><span class="blinking-cursor">_</span></span> in a simulated large-scale system.</p>
+        <p class="smaller mb-4 less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
         <a class="big">> join the waitlist</a>
       </div>
     </div>
     <div class='h-full w-1/2 flex flex-col justify-center items-center'>
       <span class='muted'>
-        image here
       </span>
     </div>
   </div>
 
   <script type="text/javascript">
-    
+    function writeText(id, text, startAt = 0) {
+      if (startAt < text.length) {
+        const speed = 50 + Math.random() * 10;
+        document.getElementById(id).innerHTML += text.charAt(startAt);
+        setTimeout(() => writeText(id, text, startAt + 1), speed);
+      }
+    }
+
+    function deleteText(id) {
+      const element = document.getElementById(id);
+      const text = element.innerHTML;
+
+      if(text.length > 0) {
+        const speed = 10 + Math.random() * 10;
+        document.getElementById(id).innerHTML = text.slice(0, -1);
+        setTimeout(() => deleteText(id), speed);
+      }
+    }
+
+    function rotateText(id, texts) {
+      const delay = 4000 + Math.random() * 1000;
+      let i = 0;
+      setInterval(() => {
+        deleteText(id)
+        setTimeout(() => {
+          writeText(id, texts[i]);
+          i = (i + 1) % texts.length;
+        }, 500)
+      }, delay)
+    }
+
+    (function() {
+      rotateText('verb', ['competing', 'learning', 'training'])
+    })();
   </script>
 
 </body>
