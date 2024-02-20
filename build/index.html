@@ -92,7 +92,7 @@
 
     h2, .h2 {
       font-size: 2em;
-      line-height: 2em;
+      line-height: 1.333em;
       margin: 1em 0; }
 
     h3, .h3 {
@@ -164,26 +164,24 @@
       overscroll-behavior: none;
     }
 
+    html {
+      overscroll-behavior: none;
+    }
+
     body {
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
+      overscroll-behavior: none;
       background-image: linear-gradient(0deg, rgb(0 0 0 / 100%), rgb(15 10 23 / 100%));
       color: rgb(187, 213, 237);
     }
 
     .container {
+      min-height: 100vh;
       position: relative;
-      height: 100%;
       padding: 2rem;
       box-sizing: border-box;
       max-width: 1260px;
       margin: 0 auto;
       display: flex;
-    }
-
-    .h-full {
-      height: 100%;
     }
 
     .flex-col {
@@ -211,19 +209,31 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
+
+    }
+
+    .hero__content {
       max-width: 580px;
     }
 
-    .stronger {
+    .color--normal {
+      color: rgb(187, 213, 237);
+    }
+
+    .color--stronger {
       color: rgb(134, 183, 252);
     }
 
-    .muted {
+    .color--standout {
+      color: rgb(229, 206, 92);
+    }
+
+    .color--muted {
       color: rgb(134, 183, 252);
       opacity: 0.25;
     }
 
-    .less-muted {
+    .color--less-muted {
       color: rgb(134, 183, 252);
       opacity: 0.35;
     }
@@ -290,17 +300,23 @@
 
   <div class='container'>
     <div class='h-full flex flex-col'>
-      <div class='brand muted'>
+      <div class='brand color--muted'>
         > simstack
       </div>
       <div class='hero'>
-        <h1 class='h2' style="color: rgb(134, 183, 252);">get good @ data engineering</h1>
-        <p class="normal mb-2">level up by <span style="display: inline-block; width: 135px; color: rgb(134, 183, 252);"><span id='verb'>training</span><span class="blinking-cursor">_</span></span> in a simulated large-scale system.</p>
-        <p class="smaller mb-4 less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
-        <a class="big">> join the waitlist</a>
+        <h1 class='h2 color--normal'>get good @ <span class='color--stronger' id='topic'>data engineering</span><span class="blinking-cursor">_</span> at scale</h1>
+          <div class='hero__content'>
+          <p class="normal mb-2">level up by training in a simulated large-scale system.</p>
+          <p class="smaller mb-4 color--less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
+          <a class="big">> join the waitlist</a>
+        </div>
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    (function(s){var w,f={},o=window,l=console,m=Math,z='postMessage',x='HackTimer.js by turuslan: ',v='Initialisation failed',p=0,r='hasOwnProperty',y=[].slice,b=o.Worker;function d(){do{p=0x7FFFFFFF>p?p+1:0}while(f[r](p));return p}if(!/MSIE 10/i.test(navigator.userAgent)){try{s=o.URL.createObjectURL(new Blob(["var f={},p=postMessage,r='hasOwnProperty';onmessage=function(e){var d=e.data,i=d.i,t=d[r]('t')?d.t:0;switch(d.n){case'a':f[i]=setInterval(function(){p(i)},t);break;case'b':if(f[r](i)){clearInterval(f[i]);delete f[i]}break;case'c':f[i]=setTimeout(function(){p(i);if(f[r](i))delete f[i]},t);break;case'd':if(f[r](i)){clearTimeout(f[i]);delete f[i]}break}}"]))}catch(e){}}if(typeof(b)!=='undefined'){try{w=new b(s);o.setInterval=function(c,t){var i=d();f[i]={c:c,p:y.call(arguments,2)};w[z]({n:'a',i:i,t:t});return i};o.clearInterval=function(i){if(f[r](i))delete f[i],w[z]({n:'b',i:i})};o.setTimeout=function(c,t){var i=d();f[i]={c:c,p:y.call(arguments,2),t:!0};w[z]({n:'c',i:i,t:t});return i};o.clearTimeout=function(i){if(f[r](i))delete f[i],w[z]({n:'d',i:i})};w.onmessage=function(e){var i=e.data,c,n;if(f[r](i)){n=f[i];c=n.c;if(n[r]('t'))delete f[i]}if(typeof(c)=='string')try{c=new Function(c)}catch(k){l.log(x+'Error parsing callback code string: ',k)}if(typeof(c)=='function')c.apply(o,n.p)};w.onerror=function(e){l.log(e)};l.log(x+'Initialisation succeeded')}catch(e){l.log(x+v);l.error(e)}}else l.log(x+v+' - HTML5 Web Worker is not supported')})('HackTimerWorker.min.js');
+  </script>
 
   <script type="text/javascript">
     function writeText(id, text, startAt = 0) {
@@ -322,20 +338,25 @@
       }
     }
 
+    function rewriteText(id, text) {
+      deleteText(id)
+      setTimeout(() => {
+        writeText(id, text);
+      }, 500)
+    }
+
     function rotateText(id, texts) {
-      const delay = 4000 + Math.random() * 1000;
+      const delay = 3000 + Math.random() * 1000;
       let i = 0;
       setInterval(() => {
-        deleteText(id)
-        setTimeout(() => {
-          writeText(id, texts[i]);
-          i = (i + 1) % texts.length;
-        }, 500)
+        const text = texts[i]
+        rewriteText(id, text)
+        i = (i + 1) % texts.length;
       }, delay)
     }
 
     (function() {
-      rotateText('verb', ['competing', 'learning', 'training'])
+      rotateText('topic', ['software engineering', 'infrastructure engineering', 'frontend engineering', 'data engineering'])
     })();
   </script>
 
