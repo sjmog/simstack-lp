@@ -147,11 +147,11 @@
     /* BEGIN layout */
 
     .mb-2 {
-      margin-bottom: 2rem;
+      margin-bottom: 2em;
     }
 
     .mb-4 {
-      margin-bottom: 4rem;
+      margin-bottom: 4em;
     }
 
     .w-1\/2 {
@@ -175,41 +175,20 @@
     }
 
     .container {
-      min-height: 100vh;
-      position: relative;
       padding: 2rem;
       box-sizing: border-box;
-      max-width: 1260px;
+      max-width: 100%;
+      min-height: 100vh;
       margin: 0 auto;
       display: flex;
-    }
-
-    .flex-col {
-      display: flex;
       flex-direction: column;
-    }
-
-    .justify-center {
-      justify-content: center;
-    }
-
-    .items-center {
-      align-items: center;
-    }
-
-    .brand {
-      position: absolute;
-      top: 2rem;
-      left: 2rem;
     }
 
     .hero {
-      flex-grow: 1;
       display: flex;
       flex-direction: column;
+      flex-grow: 1;
       justify-content: center;
-      align-items: flex-start;
-
     }
 
     .hero__content {
@@ -247,6 +226,26 @@
       -ms-animation: 1s blink step-end infinite;
       -o-animation: 1s blink step-end infinite;
       animation: 1s blink step-end infinite;
+    }
+
+    @media (min-width: 1260px) {
+      .container {
+        max-width: 1260px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      body {
+        font-size: 80%;
+      }
+
+      .container {
+        padding: 1.5rem;
+      }
+
+      .hero__content {
+        max-width: 100%;
+      }
     }
 
     @keyframes "blink" {
@@ -297,22 +296,19 @@
 </head>
 
 <body>
-
-  <div class='container'>
-    <div class='h-full flex flex-col'>
-      <div class='brand color--muted'>
-        > simstack
-      </div>
-      <div class='hero'>
-        <h1 class='h2 color--normal' id='header'>get good @ <div><span class='color--stronger' id='topic'>data engineering</span><span class="blinking-cursor">_</span></div> at scale</h1>
-          <div class='hero__content'>
-          <p class="normal mb-2">level up by training in a simulated large-scale system.</p>
-          <p class="smaller mb-4 color--less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
-          <a class="big">> join the waitlist</a>
-        </div>
+  <main class='container'>
+    <div class='brand color--muted'>
+      > simstack
+    </div>
+    <div class='hero'>
+      <h1 class='h2 color--normal' id='header'>get good @ <div id='topic-container'><span class='color--stronger' id='topic'>data engineering</span><span class="blinking-cursor">_</span></div> at scale</h1>
+        <div class='hero__content'>
+        <p class="normal mb-2">level up by training in a simulated large-scale system.</p>
+        <p class="smaller mb-4 color--less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
+        <a class="big">> join the waitlist</a>
       </div>
     </div>
-  </div>
+  </main>
 
   <script type="text/javascript">
     (function(s){var w,f={},o=window,l=console,m=Math,z='postMessage',x='HackTimer.js by turuslan: ',v='Initialisation failed',p=0,r='hasOwnProperty',y=[].slice,b=o.Worker;function d(){do{p=0x7FFFFFFF>p?p+1:0}while(f[r](p));return p}if(!/MSIE 10/i.test(navigator.userAgent)){try{s=o.URL.createObjectURL(new Blob(["var f={},p=postMessage,r='hasOwnProperty';onmessage=function(e){var d=e.data,i=d.i,t=d[r]('t')?d.t:0;switch(d.n){case'a':f[i]=setInterval(function(){p(i)},t);break;case'b':if(f[r](i)){clearInterval(f[i]);delete f[i]}break;case'c':f[i]=setTimeout(function(){p(i);if(f[r](i))delete f[i]},t);break;case'd':if(f[r](i)){clearTimeout(f[i]);delete f[i]}break}}"]))}catch(e){}}if(typeof(b)!=='undefined'){try{w=new b(s);o.setInterval=function(c,t){var i=d();f[i]={c:c,p:y.call(arguments,2)};w[z]({n:'a',i:i,t:t});return i};o.clearInterval=function(i){if(f[r](i))delete f[i],w[z]({n:'b',i:i})};o.setTimeout=function(c,t){var i=d();f[i]={c:c,p:y.call(arguments,2),t:!0};w[z]({n:'c',i:i,t:t});return i};o.clearTimeout=function(i){if(f[r](i))delete f[i],w[z]({n:'d',i:i})};w.onmessage=function(e){var i=e.data,c,n;if(f[r](i)){n=f[i];c=n.c;if(n[r]('t'))delete f[i]}if(typeof(c)=='string')try{c=new Function(c)}catch(k){l.log(x+'Error parsing callback code string: ',k)}if(typeof(c)=='function')c.apply(o,n.p)};w.onerror=function(e){l.log(e)};l.log(x+'Initialisation succeeded')}catch(e){l.log(x+v);l.error(e)}}else l.log(x+v+' - HTML5 Web Worker is not supported')})('HackTimerWorker.min.js');
@@ -364,6 +360,13 @@
 
     (function() {
       rotateText('topic', ['software engineering', 'infrastructure engineering', 'frontend engineering', 'data engineering'])
+      window.addEventListener('load', () => {
+        document.getElementById('topic-container').setAttribute('style', `height: ${document.getElementById('topic').offsetHeight}px`)
+      })
+
+      window.addEventListener('resize', () => {
+        document.getElementById('topic-container').setAttribute('style', `height: ${document.getElementById('topic').offsetHeight}px`)
+      })
     })();
   </script>
 
