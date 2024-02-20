@@ -1,0 +1,308 @@
+/* START reset */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, figure, footer, header, menu, nav, section, menu,
+time, mark, audio, video {
+margin:0;
+padding:0;
+border:0;
+outline:0;
+font-size:100%;
+vertical-align:baseline;
+background:transparent;
+}
+
+article, aside, figure, footer, header,
+hgroup, nav, section { display:block; }
+
+nav ul { list-style:none; }
+
+blockquote, q { quotes:none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; text-decoration: none; cursor: pointer; }
+
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom:1px dotted #000; cursor:help; }
+
+/* tables still need cellspacing="0" in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+
+input, select { vertical-align:middle; }
+
+/* END reset */
+
+/* BEGIN typography */
+
+@font-face {
+  src: url(https://api-8kxgumx3p-monolisa.vercel.app/api/woff?eyJpbmNsdWRlIjpbXSwiZXhjbHVkZSI6W10sInN0eWxlIjoibm9ybWFsIiwidW5pY29kZVJhbmdlIjoiVSswMDIwLTAwN0YsIFUrMDMwMC0wMzZGLCBVKzIwQTAtMjBDRiwgVSswMERGLCBVKzAwRDgiLCJ2ZXJzaW9uIjoiMi4wMTIiLCJmb3JtYXQiOiJ3b2ZmMiJ9) format("woff2");
+  font-family: ml;
+  font-weight: 100 900;
+  font-style: normal;
+  unicode-range: U+0020-007F, U+0300-036F, U+20A0-20CF, U+00DF, U+00D8;
+}
+
+html {
+  font: 100%/1.5em "ml", Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+h1, .h1 {
+  font-size: 3em;
+  line-height: 1.333em;
+  margin: 0.667em 0; }
+
+h2, .h2 {
+  font-size: 2em;
+  line-height: 1.333em;
+  margin: 1em 0; }
+
+h3, .h3 {
+  font-size: 1.75em;
+  line-height: 2.286em;
+  margin: 1.143em 0; }
+
+h4, .h4 {
+  font-size: 1.5em;
+  line-height: 1.333em;
+  margin: 1.333em 0; }
+
+h5, .h5 {
+  font-size: 1.333em;
+  line-height: 1.5em;
+  margin: 1.5em 0; }
+
+.smaller {
+  font-size: 1em;
+  line-height: 1.714em; }
+
+.small {
+  font-size: 1.167em;
+  line-height: 1.714em; }
+
+.normal {
+  font-size: 1.333em;
+  line-height: 1.5em; }
+
+.big {
+  font-size: 1.5em !important;
+  line-height: 1.333em !important;
+}
+
+.bigger {
+  font-size: 1.75em;
+  line-height: 2.286em;
+}
+
+.link {
+  color: rgb(229, 206, 92) !important;
+}
+
+.link:hover {
+  cursor: pointer !important;
+  filter: brightness(115%) !important;
+}
+
+a:hover {
+  filter: brightness(115%) !important;
+}
+
+.link:before {
+  content: '> ';
+}
+
+/* END typography */
+
+/* BEGIN layout */
+
+.mb-2 {
+  margin-bottom: 2em;
+}
+
+.mb-4 {
+  margin-bottom: 4em;
+}
+
+.w-1\/2 {
+  width: 50%;
+}
+
+/* END layout */
+
+:root {
+  overscroll-behavior: none;
+}
+
+html {
+  overscroll-behavior: none;
+}
+
+body {
+  overscroll-behavior: none;
+  background-image: linear-gradient(0deg, rgb(0 0 0 / 100%), rgb(15 10 23 / 100%));
+  color: rgb(187, 213, 237);
+}
+
+.container {
+  padding: 2rem;
+  box-sizing: border-box;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.hero__content {
+  max-width: 580px;
+}
+
+.color--normal {
+  color: rgb(187, 213, 237);
+}
+
+.color--stronger {
+  color: rgb(134, 183, 252);
+}
+
+.color--standout {
+  color: rgb(229, 206, 92) !important;
+}
+
+.color--muted {
+  color: rgb(134, 183, 252);
+  opacity: 0.25;
+}
+
+.color--less-muted {
+  color: rgb(134, 183, 252);
+  opacity: 0.35;
+}
+
+.input--unstyled {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  font-family: inherit;
+  font-size: 1em;
+  color: inherit;
+  vertical-align: top;
+  cursor: pointer;
+}
+
+.topic-container {
+  margin-top: 7px;
+}
+
+.blinking-cursor {
+  margin-left: 4px;
+  font-weight: 100;
+  font-size: 30px;
+  color: #2E3D48;
+  -webkit-animation: 1s blink step-end infinite;
+  -moz-animation: 1s blink step-end infinite;
+  -ms-animation: 1s blink step-end infinite;
+  -o-animation: 1s blink step-end infinite;
+  animation: 1s blink step-end infinite;
+}
+
+.number:before {
+  content: '#';
+  font-size: 80%;
+  display: inline-block;
+  margin-right: 2px;
+}
+
+@media (min-width: 1260px) {
+  .container {
+    max-width: 1260px;
+  }
+}
+
+@media (max-width: 580px) {
+  body {
+    font-size: 80%;
+  }
+
+  .container {
+    padding: 1.5rem;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+}
+
+@keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: rgb(134, 183, 252);
+  }
+}
+
+@-moz-keyframes blink {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: rgb(134, 183, 252);
+  }
+}
+
+@-webkit-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: rgb(134, 183, 252);
+  }
+}
+
+@-ms-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: rgb(134, 183, 252);
+  }
+}
+
+@-o-keyframes "blink" {
+  from, to {
+    color: transparent;
+  }
+  50% {
+    color: rgb(134, 183, 252);
+  }
+}
