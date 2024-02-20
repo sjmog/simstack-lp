@@ -304,7 +304,7 @@
         > simstack
       </div>
       <div class='hero'>
-        <h1 class='h2 color--normal'>get good @ <span class='color--stronger' id='topic'>data engineering</span><span class="blinking-cursor">_</span> at scale</h1>
+        <h1 class='h2 color--normal' id='header'>get good @ <div><span class='color--stronger' id='topic'>data engineering</span><span class="blinking-cursor">_</span></div> at scale</h1>
           <div class='hero__content'>
           <p class="normal mb-2">level up by training in a simulated large-scale system.</p>
           <p class="smaller mb-4 color--less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
@@ -320,9 +320,14 @@
 
   <script type="text/javascript">
     function writeText(id, text, startAt = 0) {
-      if (startAt < text.length) {
+      const element = document.getElementById(id);
+      if(startAt === 0) {
         const speed = 50 + Math.random() * 10;
-        document.getElementById(id).innerHTML += text.charAt(startAt);
+        element.innerHTML = text.charAt(startAt);
+        setTimeout(() => writeText(id, text, startAt + 1), speed);
+      } else if (startAt < text.length) {
+        const speed = 50 + Math.random() * 10;
+        element.innerHTML += text.charAt(startAt);
         setTimeout(() => writeText(id, text, startAt + 1), speed);
       }
     }
@@ -331,9 +336,11 @@
       const element = document.getElementById(id);
       const text = element.innerHTML;
 
-      if(text.length > 0) {
+      if(text.length === 1) {
+        element.innerHTML = '&nbsp;';
+      } else if(text.length > 0) {
         const speed = 10 + Math.random() * 10;
-        document.getElementById(id).innerHTML = text.slice(0, -1);
+        element.innerHTML = text.slice(0, -1);
         setTimeout(() => deleteText(id), speed);
       }
     }
