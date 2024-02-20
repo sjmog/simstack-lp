@@ -123,8 +123,8 @@
       line-height: 1.5em; }
 
     .big {
-      font-size: 1.5em;
-      line-height: 1.333em;
+      font-size: 1.5em !important;
+      line-height: 1.333em !important;
     }
 
     .bigger {
@@ -132,14 +132,14 @@
       line-height: 2.286em;
     }
 
-    a {
-      color: rgb(229, 206, 92);
-      border-bottom: 2px solid rgb(229, 206, 92);
+    a, .link {
+      color: rgb(229, 206, 92) !important;
+      border-bottom: 2px solid rgb(229, 206, 92) !important;
     }
 
-    a:hover {
-      cursor: pointer;
-      filter: brightness(115%);
+    a:hover, .link:hover {
+      cursor: pointer !important;
+      filter: brightness(115%) !important;
     }
 
     /* END typography */
@@ -204,7 +204,7 @@
     }
 
     .color--standout {
-      color: rgb(229, 206, 92);
+      color: rgb(229, 206, 92) !important;
     }
 
     .color--muted {
@@ -215,6 +215,23 @@
     .color--less-muted {
       color: rgb(134, 183, 252);
       opacity: 0.35;
+    }
+
+    .input--unstyled {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
+      font-family: inherit;
+      font-size: 1em;
+      color: inherit;
+      vertical-align: top;
+      cursor: pointer;
     }
 
     .blinking-cursor {
@@ -305,8 +322,12 @@
         <div class='hero__content'>
         <p class="normal mb-2">level up by training in a simulated large-scale system.</p>
         <p class="smaller mb-4 color--less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
-        <a class="big">> join the waitlist</a>
-      </div>
+        <form id='join-form' method='post' action='https://simstack.io/waitlist'>
+          <span class='big color--standout'>></span>
+          <input required id='join' class='input--unstyled big color--standout' type="email" role="link" tabindex="0" aria-label="join the waitlist" onkeypress="handleKeyPress(event)" value='join the waitlist' placeholder="type your email" />
+          <span id='join-hint' class='color--standout color--muted' style="display: none;">press enter to submit</span>
+        </div>
+      </form>
     </div>
   </main>
 
@@ -366,6 +387,25 @@
 
       window.addEventListener('resize', () => {
         document.getElementById('topic-container').setAttribute('style', `height: ${document.getElementById('topic').offsetHeight}px`)
+      })
+
+      const joinElement = document.getElementById('join')
+      joinElement.addEventListener('click', () => {
+        joinElement.value = ''
+      })
+
+      joinElement.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter') {
+          if (joinElement.checkValidity()) {
+            document.getElementById('join-form').submit();
+          } else {
+            joinElement.reportValidity();
+          }
+        }
+
+        if(e.target.value.length > 0) {
+          document.getElementById('join-hint').setAttribute('style', 'display: inline-block')
+        }
       })
     })();
   </script>
