@@ -1,0 +1,15 @@
+{
+    "name": "simstack",
+    "short_name": "simstack",
+    "icons": [
+        {
+            "src": "/android-chrome-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#0a0710",
+    "background_color": "#0a0710",
+    "start_url": "https://simstack.io",
+    "display": "standalone"
+}
