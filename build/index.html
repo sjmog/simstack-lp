@@ -49,6 +49,31 @@
     </div>
   </main>
 
+  <main class='container'>
+    <div class='hero'>
+      <h1 class='h2 color--normal mb-0' id='header'>learn <span class='color--stronger'>real-life</span> engineering</h1>
+        <div class='hero__content'>
+          <p class="normal mb-2">without risking your job</p>
+          <p class="smaller mb-2 color--less-muted">simstack spins up production-like systems built by engineers working at scale, and runs war-story scenarios that you tackle using real-life (not sandbox) tools:</p>
+
+          <p class='smaller color--muted'>data architecture</p>
+          <p class='smaller color--normal mb-1'>> build live streaming analytics without killing the application databases</p>
+
+          <p class='smaller color--muted'>data resilience</p>
+          <p class='smaller color--normal mb-1'>> fix batch-processing pipelines that are being filled with broken data due to a service error</p>
+
+          <p class='smaller color--muted'>frontend performance</p>
+          <p class='smaller color--normal mb-2'>> resolve cascading renders crashing the frontend for users in rtl-language countries</p>
+          <p class="smaller mb-2 color--less-muted">and loads more.</p>
+          <form id='join-form' method='get' action='https://simstack.io/confirmed'>
+            <span class='big color--standout'>></span>
+            <input name='email' required id='join' class='input--unstyled big color--standout' type="email" role="link" tabindex="0" aria-label="join the waitlist" onkeypress="handleKeyPress(event)" value='join the waitlist' placeholder="type your email" />
+            <span id='join-hint' class='color--standout color--less-muted' style="display: none;">press enter to submit</span>
+        </div>
+      </form>
+    </div>
+  </main>
+
   <script type="text/javascript">
     (function(s){var w,f={},o=window,l=console,m=Math,z='postMessage',x='HackTimer.js by turuslan: ',v='Initialisation failed',p=0,r='hasOwnProperty',y=[].slice,b=o.Worker;function d(){do{p=0x7FFFFFFF>p?p+1:0}while(f[r](p));return p}if(!/MSIE 10/i.test(navigator.userAgent)){try{s=o.URL.createObjectURL(new Blob(["var f={},p=postMessage,r='hasOwnProperty';onmessage=function(e){var d=e.data,i=d.i,t=d[r]('t')?d.t:0;switch(d.n){case'a':f[i]=setInterval(function(){p(i)},t);break;case'b':if(f[r](i)){clearInterval(f[i]);delete f[i]}break;case'c':f[i]=setTimeout(function(){p(i);if(f[r](i))delete f[i]},t);break;case'd':if(f[r](i)){clearTimeout(f[i]);delete f[i]}break}}"]))}catch(e){}}if(typeof(b)!=='undefined'){try{w=new b(s);o.setInterval=function(c,t){var i=d();f[i]={c:c,p:y.call(arguments,2)};w[z]({n:'a',i:i,t:t});return i};o.clearInterval=function(i){if(f[r](i))delete f[i],w[z]({n:'b',i:i})};o.setTimeout=function(c,t){var i=d();f[i]={c:c,p:y.call(arguments,2),t:!0};w[z]({n:'c',i:i,t:t});return i};o.clearTimeout=function(i){if(f[r](i))delete f[i],w[z]({n:'d',i:i})};w.onmessage=function(e){var i=e.data,c,n;if(f[r](i)){n=f[i];c=n.c;if(n[r]('t'))delete f[i]}if(typeof(c)=='string')try{c=new Function(c)}catch(k){l.log(x+'Error parsing callback code string: ',k)}if(typeof(c)=='function')c.apply(o,n.p)};w.onerror=function(e){l.log(e)};l.log(x+'Initialisation succeeded')}catch(e){l.log(x+v);l.error(e)}}else l.log(x+v+' - HTML5 Web Worker is not supported')})('HackTimerWorker.min.js');
   </script>
