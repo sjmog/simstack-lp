@@ -1,43 +1,17 @@
-addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request))
-})
+export async function onRequestPost(context) {
+  console.log(context.request)
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://simstack.io", // Change this to your domain
-  "Access-Control-Allow-Methods": "POST",
-  "Access-Control-Allow-Headers": "Content-Type",
-  "Access-Control-Allow-Credentials": "true",
-}
-
-async function handleRequest(request) {
-  if (request.method === "OPTIONS") {
-    // Handle CORS preflight request
-    return new Response(null, { headers: corsHeaders })
-  }
-
-  if (request.method === "POST") {
-    // Check for CORS
-    const origin = request.headers.get("Origin");
-    if (!origin || origin !== "https://simstack.io") {
-      return new Response("CORS header ‘Origin’ missing or incorrect", { status: 403 })
+  try {
+    const { email } = await context.request.json()
+    if (!email) {
+      return new Response("Email is required", { status: 400 });
     }
 
-    try {
-      // Parse the request body to get the email
-      const { email } = await request.json();
-      if (!email) {
-        return new Response("Email is required", { status: 400, headers: corsHeaders });
-      }
+    await addEmailToDatabase(email);
 
-      // Add email to your D1 database
-      await addEmailToDatabase(email);
-
-      return new Response("Email added to waitlist", { status: 200, headers: corsHeaders });
-    } catch (e) {
-      return new Response(`Error adding email: ${e.message}`, { status: 500, headers: corsHeaders });
-    }
-  } else {
-    return new Response("Method not allowed", { status: 405, headers: corsHeaders });
+    return new Response("Email added to waitlist", { status: 200 });
+  } catch (e) {
+    return new Response(`Error adding email: ${e.message}`, { status: 500 });
   }
 }
 
@@ -56,4 +30,5 @@ async function addEmailToDatabase(email) {
 async function runQuery(url, query, parameters) {
   // Use fetch API or D1 bindings to run your query against the database
   // This part of the code depends on your D1 setup and how you access it from Workers
+  console.log('Running query:', query);
 }
