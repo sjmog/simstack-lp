@@ -142,7 +142,7 @@
     async function handleSubmit(e) {
       const email = e.target.value
       const urlParams = new URLSearchParams(window.location.search);
-      const utmSource = urlParams.get('id');
+      const utmSource = urlParams.get('utm_source');
       const utmMedium = urlParams.get('utm_medium');
       const utmCampaign = urlParams.get('utm_campaign');
 
