@@ -34,7 +34,7 @@
     <div class='hero'>
       <h3 style='margin-bottom: 0; line-height: 1.777em'><span class='color--less-muted'>hi</span> <span id='email' class='color--stronger'></span></h3>
       <h1 style='margin-top: 0; line-height: 1.5em' class='h3 color--normal mb-1'>
-        you're <span class='color--stronger number'>24,122</span> on the waitlist.
+        <span class='color--standout'>you're on the waitlist</span>.
       </h1>
       <div class='hero__content'>
         <p class="smaller color--less-muted mb-2">we're launching in june, and we'll be in touch before then.</p>
@@ -43,13 +43,27 @@
       </p>
 
       <section id='preferences'>
-        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='data engineering' />
-        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='frontend engineering' />
-        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='backend engineering' />
-        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='security' />
-        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='infrastructure engineering' />
-        <input name='preference' required id='other' class='input--unstyled small hover--standout active--standout focus--standout' type="text" role="link" tabindex="0" aria-label="other (please type)" onkeypress="handleKeyPress(event)" onfocus="handleFocus(event)" value='other (please type)' placeholder="type your preference" />
+        <ul>
+          <li>
+        <input class='input--unstyled block small before--chevron hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='data engineering' />
+      </li>
+      <li>
+        <input class='input--unstyled block small before--chevron hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='frontend engineering' />
+      </li>
+      <li>
+        <input class='input--unstyled block small before--chevron hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='backend engineering' />
+      </li>
+      <li>
+        <input class='input--unstyled block small before--chevron hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='security' />
+      </li>
+      <li>
+        <input class='input--unstyled block small before--chevron hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='infrastructure engineering' />
+      </li>
+      <li>
+        <input name='preference' required id='other' class='input--unstyled small before--chevron hover--standout active--standout focus--standout' type="text" role="link" tabindex="0" aria-label="other (please type)" onkeypress="handleKeyPress(event)" onfocus="handleFocus(event)" value='other (please type)' placeholder="type your preference" />
         <span id='other-hint' class='color--standout color--less-muted' style="display: none;">press enter to submit</span>
+      </li>
+        </ul>
       </section>
     </div>
   </main>

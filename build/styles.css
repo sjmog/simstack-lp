@@ -183,6 +183,10 @@ body {
   color: rgb(187, 213, 237);
 }
 
+ul {
+  list-style-type: '> ';
+}
+
 .container {
   padding: 2rem;
   box-sizing: border-box;
@@ -257,6 +261,10 @@ body {
 
 .topic-container {
   margin-top: 7px;
+}
+
+.before--chevron:before {
+  content: '> ';
 }
 
 .blinking-cursor {
