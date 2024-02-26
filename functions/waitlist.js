@@ -1,11 +1,11 @@
 export async function onRequestPost(context) {
   try {
-    const { email } = await context.request.json();
+    const { email, utmSource, utmMedium, utmCampaign } = await context.request.json();
     if (!email) {
       return new Response("Email is required", { status: 400 });
     }
 
-    const result = await upsertRecord({ email }, context.env);
+    const result = await upsertRecord({ email, "UTM source": utmSource, "UTM medium": utmMedium, "UTM campaign": utmCampaign }, context.env);
 
     if (result.ok) {
       const json = await result.json();

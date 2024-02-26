@@ -141,12 +141,17 @@
 
     async function handleSubmit(e) {
       const email = e.target.value
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmSource = urlParams.get('id');
+      const utmMedium = urlParams.get('utm_medium');
+      const utmCampaign = urlParams.get('utm_campaign');
+
       const response = await fetch('https://simstack.io/waitlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, utmSource, utmMedium, utmCampaign })
       })
 
       if(response.ok) {
