@@ -40,7 +40,7 @@
         <div class='hero__content'>
         <p class="normal mb-2">level up by training in a simulated large-scale system.</p>
         <p class="smaller mb-4 color--less-muted">simstack is a flight simulator for engineers. complete challenges, learn skills, and test yourself against big system problems.</p>
-        <form id='join-form' onsubmit="handleSubmit(event)" method='post' action='http://localhost:8788/waitlist'>
+        <form id='join-form' onsubmit="handleSubmit(event)" method='post' action='https://simstack.io/waitlist'>
           <span class='big color--standout'>></span>
           <input name='email' required id='join' class='input--unstyled big color--standout' type="email" role="link" tabindex="0" aria-label="join the waitlist" onfocus="handleFocus(event)" onkeypress="handleKeyPress(event)" value='join the waitlist' placeholder="type your email" />
           <span id='join-hint' class='color--standout color--less-muted' style="display: none;">press enter to submit</span>
@@ -141,7 +141,7 @@
 
     async function handleSubmit(e) {
       const email = e.target.value
-      const response = await fetch('http://localhost:8788/waitlist', {
+      const response = await fetch('https://simstack.io/waitlist', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -151,7 +151,7 @@
 
       if(response.ok) {
         const json = await response.json()
-        window.location.href = `http://localhost:8788/confirmed?id=${json.id}&email=${json.email}`
+        window.location.href = `https://simstack.io/confirmed?id=${json.id}&email=${json.email}`
       } else {
         const data = await response.text()
         alert(data)
