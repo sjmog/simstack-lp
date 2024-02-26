@@ -33,16 +33,70 @@
     </a>
     <div class='hero'>
       <h3 style='margin-bottom: 0; line-height: 1.777em'><span class='color--less-muted'>hi</span> <span id='email' class='color--stronger'></span></h3>
-      <h1 style='margin-top: 0; line-height: 1.5em' class='h3 color--normal'>
+      <h1 style='margin-top: 0; line-height: 1.5em' class='h3 color--normal mb-1'>
         you're <span class='color--stronger number'>24,122</span> on the waitlist.
       </h1>
       <div class='hero__content'>
-      <p class="normal mb-2">want to jump up a few places?<br /><a class='link'>refer us to a friend</a></p>
-      <p class="smaller mb-4 color--less-muted">we're launching in june, and we'll be in touch before then.</p>
+        <p class="smaller color--less-muted mb-2">we're launching in june, and we'll be in touch before then.</p>
+      <p class="normal mb-1">
+        extra question – which one of these are you most interested in?
+      </p>
+
+      <section id='preferences'>
+        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='data engineering' />
+        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='frontend engineering' />
+        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='backend engineering' />
+        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='security' />
+        <input class='input--unstyled block small hover--standout active--standout' type='submit' onclick='handleSubmit(event)' value='infrastructure engineering' />
+        <input name='preference' required id='other' class='input--unstyled small hover--standout active--standout focus--standout' type="text" role="link" tabindex="0" aria-label="other (please type)" onkeypress="handleKeyPress(event)" onfocus="handleFocus(event)" value='other (please type)' placeholder="type your preference" />
+        <span id='other-hint' class='color--standout color--less-muted' style="display: none;">press enter to submit</span>
+      </section>
     </div>
   </main>
 
   <script type='text/javascript'>
+    function handleFocus(e) {
+      if(e.target.value === 'other (please type)') {
+        e.target.value = ''
+      }
+    }
+
+    function handleKeyPress(e) {
+      if(e.key === 'Enter') {
+        e.preventDefault()
+        if (e.target.checkValidity()) {
+          handleSubmit(e)
+        } else {
+          e.target.reportValidity();
+        }
+      }
+
+      if(e.target.value.length > 0) {
+        document.getElementById('other-hint').setAttribute('style', 'display: inline-block')
+      }
+    }
+
+    async function handleSubmit(e) {
+      const preference = e.target.value
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      const response = await fetch('http://localhost:8788/waitlist', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id, preference })
+      })
+
+      if(response.ok) {
+        document.getElementById('preferences').innerHTML = 'thanks!'
+      } else {
+        console.error(response)
+        const data = await response.text()
+        alert(data)
+      }
+    }
+
     (function() {
       const urlParams = new URLSearchParams(window.location.search);
       const email = urlParams.get('email');

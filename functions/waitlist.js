@@ -1,34 +1,99 @@
 export async function onRequestPost(context) {
-  console.log(context.request)
-
   try {
-    const { email } = await context.request.json()
+    const { email } = await context.request.json();
     if (!email) {
       return new Response("Email is required", { status: 400 });
     }
 
-    await addEmailToDatabase(email);
+    const result = await upsertRecord({ email }, context.env);
 
-    return new Response("Email added to waitlist", { status: 200 });
+    if (result.ok) {
+      const json = await result.json();
+      return Response.json({ id: json.records[0].id, email: email });
+    } else {
+      return new Response(`Error: ${result.statusText}`, {
+        status: result.status,
+      });
+    }
   } catch (e) {
-    return new Response(`Error adding email: ${e.message}`, { status: 500 });
+    return new Response(`Error: ${e.message}`, { status: 500 });
   }
 }
 
-async function addEmailToDatabase(email) {
-  // Replace with your actual D1 database interaction logic
-  // This is a placeholder function to illustrate the process
-  const DATABASE_URL = "YOUR_D1_DATABASE_URL";
-  const query = `INSERT INTO waitlist (email) VALUES (?)`;
-  // Assuming you have a function to run this query against your D1 database
-  // You might need to use D1 bindings or an external service to execute this SQL command
-  await runQuery(DATABASE_URL, query, [email]);
+export async function onRequestPatch(context) {
+  try {
+    const { id, preference } = await context.request.json();
+    if (!id) {
+      return new Response("Airtable ID is required", { status: 400 });
+    }
+
+    const result = await updateRecord(id, { preference }, context.env);
+
+    if (result.ok) {
+      const json = await result.json();
+      return Response.json({ id: json.records[0].id });
+    } else {
+      return new Response(`Error: ${result.statusText}`, {
+        status: result.status,
+      });
+    }
+  } catch (e) {
+    return new Response(`Error: ${e.message}`, { status: 500 });
+  }
 }
 
-// Placeholder for the actual query execution - you will need to implement this
-// based on how you interact with your D1 database
-async function runQuery(url, query, parameters) {
-  // Use fetch API or D1 bindings to run your query against the database
-  // This part of the code depends on your D1 setup and how you access it from Workers
-  console.log('Running query:', query);
+async function upsertRecord(body, env) {
+  const result = await fetch(
+    `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${encodeURIComponent(
+      env.AIRTABLE_TABLE_NAME,
+    )}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        performUpsert: {
+          fieldsToMergeOn: ["email"],
+        },
+        records: [
+          {
+            fields: body,
+          },
+        ],
+      }),
+      headers: {
+        Authorization: `Bearer ${env.AIRTABLE_ACCESS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  return result;
+}
+
+async function updateRecord(id, body, env) {
+  const jsonBody = JSON.stringify({
+    records: [
+      {
+        id: id,
+        fields: body,
+      },
+    ],
+  });
+
+  console.log(jsonBody)
+
+  const result = await fetch(
+    `https://api.airtable.com/v0/${env.AIRTABLE_BASE_ID}/${encodeURIComponent(
+      env.AIRTABLE_TABLE_NAME,
+    )}`,
+    {
+      method: "PATCH",
+      body: jsonBody,
+      headers: {
+        Authorization: `Bearer ${env.AIRTABLE_ACCESS_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+
+  return result;
 }

@@ -150,9 +150,11 @@
       })
 
       if(response.ok) {
-        window.location.href = `http://localhost:8788/confirmed?email=${email}`
+        const json = await response.json()
+        window.location.href = `http://localhost:8788/confirmed?id=${json.id}&email=${json.email}`
       } else {
-        alert(response.message)
+        const data = await response.text()
+        alert(data)
       }
     }
 

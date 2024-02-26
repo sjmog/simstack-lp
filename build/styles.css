@@ -226,6 +226,18 @@ body {
   opacity: 0.4;
 }
 
+.hover--standout:hover {
+  color: rgb(229, 206, 92) !important;
+}
+
+.active--standout:active {
+  color: rgb(229, 206, 92) !important;
+}
+
+.focus--standout:focus {
+  color: rgb(229, 206, 92) !important;
+}
+
 .input--unstyled {
   -webkit-appearance: none;
   -moz-appearance: none;
